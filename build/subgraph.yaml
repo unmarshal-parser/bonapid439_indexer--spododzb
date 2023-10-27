@@ -1,0 +1,57 @@
+specVersion: 0.0.5
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Contract
+    network: base
+    source:
+      address: Ba5e05cb26b78eDa3A2f8e3b3814726305dcAc83
+      abi: Contract
+      startBlock: 4510641
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ApprovalForAll
+        - ArtistWithdraw
+        - ArtistsEarned
+        - OpenEditionPriceUpdated
+        - OwnerFeeUpdated
+        - OwnerWithdrew
+        - OwnershipTransferred
+        - Painted
+        - Started
+        - TransferBatch
+        - TransferSingle
+        - URI
+      abis:
+        - name: Contract
+          file: Contract/abis/Contract.json
+      eventHandlers:
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: ArtistWithdraw(indexed uint256,address,uint256)
+          handler: handleArtistWithdraw
+        - event: ArtistsEarned(indexed uint256,uint256)
+          handler: handleArtistsEarned
+        - event: OpenEditionPriceUpdated(uint256)
+          handler: handleOpenEditionPriceUpdated
+        - event: OwnerFeeUpdated(uint256)
+          handler: handleOwnerFeeUpdated
+        - event: OwnerWithdrew(uint256,address)
+          handler: handleOwnerWithdrew
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Painted(indexed uint256,uint256,address,bytes)
+          handler: handlePainted
+        - event: Started(uint256)
+          handler: handleStarted
+        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+          handler: handleTransferBatch
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+        - event: URI(string,indexed uint256)
+          handler: handleURI
+      file: Contract/Contract.wasm
